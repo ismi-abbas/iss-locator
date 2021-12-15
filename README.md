@@ -1,6 +1,6 @@
 # NeXT-Assessment ISS Locator
 
-A simple fetching API app
+A simple fetching API app that provide 10 location in 10 minutes time interval
 
 
 ## Installation
