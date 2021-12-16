@@ -13,8 +13,8 @@ function App() {
 		setDateTime(dateParsed);
 
 		const timeStart = dateParsed;
-		const timeEnd = dateParsed + 3000;
-		const timeEndBefore = dateParsed - 3000;
+		const timeEnd = dateParsed + 3600;
+		const timeEndBefore = dateParsed - 3600;
 		const timeArray = [];
 
 		let time = timeStart;
@@ -29,7 +29,7 @@ function App() {
 		} while (time > timeEndBefore);
 
 		console.log(timeArray);
-		timeArray.sort((a, b) => a - b).shift(0);
+		timeArray.sort((a, b) => a - b);
 		const uniqueChars = [...new Set(timeArray)];
 		console.log(uniqueChars);
 		setTimeArray(uniqueChars);
