@@ -7,6 +7,12 @@ A simple fetching API app that provide 10 location in 10 minutes time interval
 
 Install my-project with npm
 
+> This project bootstrapped with create-react-app
+> 
+> Make sure to have Nodejs install before running
+> 
+> Clone this repo and run this command inside the folder
+
 ```bash
   npm install
   npm start
