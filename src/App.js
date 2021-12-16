@@ -13,7 +13,8 @@ function App() {
 		setDateTime(dateParsed);
 
 		const timeStart = dateParsed;
-		const timeEnd = dateParsed + 6000;
+		const timeEnd = dateParsed + 3000;
+		const timeEndBefore = dateParsed - 3000;
 		const timeArray = [];
 
 		let time = timeStart;
@@ -22,8 +23,16 @@ function App() {
 			timeArray.push(time);
 		} while (time < timeEnd);
 
+		do {
+			time = time - 600;
+			timeArray.push(time);
+		} while (time > timeEndBefore);
+
 		console.log(timeArray);
-		setTimeArray(timeArray);
+		timeArray.sort((a, b) => a - b).shift(0);
+		const uniqueChars = [...new Set(timeArray)];
+		console.log(uniqueChars);
+		setTimeArray(uniqueChars);
 		console.log(dateTime);
 	};
 
@@ -64,20 +73,18 @@ function App() {
 					</button>
 				</div>
 			</div>
-			<div className='container-fluid'>
-				<div className='row'>
+			<div className=''>
+				<div className=''>
 					{data.map((item, index) => (
-						<div key={index} className='col text-white m-2 rounded'>
-							<div className=''>
-								<h6 className='lead fw-bold'>
-									{moment.unix(item.timestamp).format('h:mm A')}
-								</h6>
-								<h6 className='lead'>Latitude: {item.latitude}</h6>
-								<h6 className='lead'>Longitude: {item.longitude}</h6>
-								<h6 className='lead'>
-									Altitude: {item.altitude.toFixed(2)} kilometers
-								</h6>
-							</div>
+						<div key={index} className='text-white m-2 rounded'>
+							<h6>
+								<span className='fw-bold'>
+									{' '}
+									{moment.unix(item.timestamp).format('h:mm A')}{' '}
+								</span>
+								Latitude: {item.latitude} || Longitude: {item.longitude} ||{' '}
+								Altitude: {item.altitude.toFixed(2)} miles
+							</h6>
 						</div>
 					))}
 				</div>
