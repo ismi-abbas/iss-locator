@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import moment from 'moment';
-import Map from './components/Map';
+// import Map from './components/Map';
 
 function App() {
 	const [dateTime, setDateTime] = useState([]);
@@ -28,19 +28,28 @@ function App() {
 			timeArray.push(time);
 		} while (time > timeEndBefore);
 
-		console.log(timeArray);
 		timeArray.sort((a, b) => a - b);
 		const uniqueChars = [...new Set(timeArray)];
-		console.log(uniqueChars);
 		setTimeArray(uniqueChars);
-		console.log(dateTime);
+		console.log(uniqueChars);
 	};
 
+	// Fetching data from backend
 	const getData = async () => {
 		try {
-			const url = `https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=${timeArray}&units=miles`;
-			const response = await fetch(url);
-			const data = await response.json();
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			};
+
+			const body = JSON.stringify(timeArray);
+			const res = await fetch(
+				`http://localhost:5000/location/${timeArray}`,
+				config,
+				body
+			);
+			const data = await res.json();
 			setData(data);
 		} catch (error) {
 			console.log(error);
@@ -82,14 +91,15 @@ function App() {
 									{' '}
 									{moment.unix(item.timestamp).format('h:mm A')}{' '}
 								</span>
-								Latitude: {item.latitude} || Longitude: {item.longitude} ||{' '}
-								Altitude: {item.altitude.toFixed(2)} miles
+								Latitude: {item.latitude.toFixed(2)} || Longitude:{' '}
+								{item.longitude.toFixed(2)} || Altitude:{' '}
+								{item.altitude.toFixed(2)} miles
 							</h6>
 						</div>
 					))}
 				</div>
 			</div>
-			<Map />
+			{/* <Map /> */}
 		</div>
 	);
 }
