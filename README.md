@@ -28,6 +28,9 @@ npm run dev
 cd client
 npm run build
 ```
+
+## Troubleshooting
+If console show cannot fetch during running, just install Moesif CORS extension. This react app requires a CORS service, since it fetching from backend server.
     
 ## Authors
 
